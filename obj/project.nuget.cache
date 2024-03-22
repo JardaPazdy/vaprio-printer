@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "NMEtqc5jUFNqImsBBTaw7vYPOb7jnsBByJ8u8H1D8H+UYoIRcC0PIXLEGrd10xQBfvrBzLqlBYn58aG1bWZ/EA==",
+  "success": true,
+  "projectFilePath": "D:\\Programovani\\vaprio-printer\\vaprio-printer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jaros\\.nuget\\packages\\freespire.pdf\\8.6.0\\freespire.pdf.8.6.0.nupkg.sha512",
+    "C:\\Users\\jaros\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\jaros\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
+    "C:\\Users\\jaros\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\jaros\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
