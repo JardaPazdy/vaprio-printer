@@ -1,9 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.Diagnostics;
 
 class Program
 {
@@ -35,10 +37,29 @@ class Program
                 if (response.IsSuccessStatusCode)
                 {
                     // Přečtení obsahu odpovědi jako řetězec
-                    string responseData = await response.Content.ReadAsStringAsync();
+                    string content = await response.Content.ReadAsStringAsync();
                     
-                    // Zde můžete provést další zpracování dat, např. jejich zobrazení
-                    Console.WriteLine(responseData);
+                    var headers = response.Headers;
+
+                    var printType = headers.GetValues("Vaprio-Print-Type").First();
+                    var printerName = headers.GetValues("Vaprio-Printer-Name").First();
+
+                    // nacetly se nam udaje, tak provedeme co je potreba
+                    // pokud je to pdf, nacteme si ten soubor a posleme ho na tiskarnu
+                    if(printType == "pdf") {
+                        var obsahSouboru = httpClient.GetByteArrayAsync(content).Result;
+                        File.WriteAllBytes("temp.pdf", obsahSouboru);
+
+                        PrintPDF("temp.pdf", printerName);
+                    }
+
+                    // tisk html
+                    if(printType == "html") {}
+
+                    // tisk plain textu 
+                    if(printType == "plain") {}
+
+                    Console.WriteLine($"{printType} - {printerName} - {content}");
                 }
                 else
                 {
@@ -49,7 +70,7 @@ class Program
             {
                 Console.WriteLine($"Chyba: {ex.Message}");
             }
-        }, null, TimeSpan.Zero, TimeSpan.FromSeconds(3)); // Interval X sekund
+        }, null, TimeSpan.Zero, TimeSpan.FromSeconds(20)); // Interval X sekund
 
         // Udržení hlavního vlákna živého
         Console.ReadLine();
@@ -57,4 +78,50 @@ class Program
         // Zastavení Timeru před ukončením programu
         timer.Dispose();
     }
+
+    // Metoda pro tisk PDF souboru
+    static void PrintPDF(string fileName, string printerName)
+    {
+        // Definice cesty k PDF souboru, který chcete vytisknout
+        string pdfFilePath = fileName;
+
+        // Nastavení parametrů pro tisk na tiskárnu
+        ProcessStartInfo startInfo = new ProcessStartInfo
+        {
+            Verb = "printto",
+            FileName = pdfFilePath,
+            UseShellExecute = true,
+            Arguments = printerName
+        };
+
+        // Spuštění procesu pro tisk PDF souboru
+        try
+        {
+            using (Process printProcess = new Process())
+            {
+                printProcess.StartInfo = startInfo;
+                printProcess.EnableRaisingEvents = true; // Povolení zvyšování událostí
+                printProcess.Exited += PrintProcess_Exited; // Přidání obslužné metody pro událost Exited
+                printProcess.Start();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Chyba při tisku PDF souboru: " + ex.Message);
+        }
+    }   
+
+    // Metoda pro zpracování události Exited
+    private static void PrintProcess_Exited(object sender, EventArgs e)
+    {
+        if (sender != null)
+        {
+            Console.WriteLine("Tisk byl dokončen.");
+            // Zde můžete provést další akce, které chcete vykonat po dokončení tisku
+        }
+        else
+        {
+            Console.WriteLine("Chyba: Objekt sender je null.");
+        }
+    }     
 }
