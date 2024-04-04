@@ -1,0 +1,6 @@
+D:\Programovani\vaprio-printer\obj\Debug\net5.0-windows\vaprio-printer.csproj.AssemblyReference.cache
+D:\Programovani\vaprio-printer\obj\Debug\net5.0-windows\vaprio-printer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programovani\vaprio-printer\obj\Debug\net5.0-windows\vaprio-printer.AssemblyInfoInputs.cache
+D:\Programovani\vaprio-printer\obj\Debug\net5.0-windows\vaprio-printer.AssemblyInfo.cs
+D:\Programovani\vaprio-printer\obj\Debug\net5.0-windows\vaprio-printer.csproj.CoreCompileInputs.cache
+D:\Programovani\vaprio-printer\obj\Debug\net5.0-windows\vaprio-printer.sourcelink.json

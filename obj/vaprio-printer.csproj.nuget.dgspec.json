@@ -46,6 +46,14 @@
             "FreeSpire.PDF": {
               "target": "Package",
               "version": "[8.6.0, )"
+            },
+            "itext": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "itext.bouncy-castle-adapter": {
+              "target": "Package",
+              "version": "[8.0.2, )"
             }
           },
           "imports": [

@@ -6,6 +6,10 @@ using System.Threading;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Diagnostics;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Html2pdf;
 
 class Program
 {
@@ -54,7 +58,9 @@ class Program
                     }
 
                     // tisk html
-                    if(printType == "html") {}
+                    if(printType == "html") {
+                        PrintHtmlToPdf(content, printerName);
+                    }
 
                     // tisk plain textu 
                     if(printType == "plain") {}
@@ -124,4 +130,33 @@ class Program
             Console.WriteLine("Chyba: Objekt sender je null.");
         }
     }     
+
+    static void PrintHtmlToPdf(string htmlContent, string printerName)
+    {
+        string pdfFilePath = "temp.pdf";
+
+        // Převod HTML obsahu na PDF
+        try
+        {
+            using (FileStream pdfFileStream = new FileStream(pdfFilePath, FileMode.Create))
+            {
+                HtmlConverter.ConvertToPdf(htmlContent, pdfFileStream);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Chyba při vytváření PDF: " + ex.Message);
+            return;
+        }
+
+        // Tisk PDF souboru na zvolenou tiskárnu
+        using (Process process = new Process())
+        {
+            process.StartInfo.FileName = pdfFilePath;
+            process.StartInfo.Arguments = "\"" + printerName + "\"";
+            process.StartInfo.Verb = "printto";
+            process.StartInfo.CreateNoWindow = true;
+            process.Start();
+        }
+    } 
 }

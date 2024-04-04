@@ -18,3 +18,4 @@ D:\Programovani\vaprio-printer\obj\Debug\net8.0-windows\vaprio-printer.pdb
 D:\Programovani\vaprio-printer\obj\Debug\net8.0-windows\vaprio-printer.genruntimeconfig.cache
 D:\Programovani\vaprio-printer\obj\Debug\net8.0-windows\ref\vaprio-printer.dll
 D:\Programovani\vaprio-printer\obj\Debug\net8.0-windows\vaprio-printer.sourcelink.json
+D:\Programovani\vaprio-printer\bin\Debug\net8.0-windows\temp.pdf
